@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:st13_14_fake_store/product_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -78,11 +79,22 @@ class _MyHomePageState extends State<MyHomePage> {
                     crossAxisSpacing: 4.0,
                     mainAxisSpacing: 4.0),
                 itemBuilder: (BuildContext context, int index) {
-                  return ProductCard(
+                  return GestureDetector(
+                    child: ProductCard(
                       imageUrl: items[index]['image'],
                       title: items[index]['title'],
                       category: items[index]['category'],
-                      price: (items[index]['price']).toString()
+                      price: (items[index]['price']).toString(),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetail(product_id: items[index]['id']),
+                        ),
+                      );
+                      print(items[index]['id']);
+                    },
                   );
                 });
           } else {
@@ -93,7 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
 
 class ProductCard extends StatelessWidget {
   final String imageUrl;
@@ -135,9 +146,9 @@ class ProductCard extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-              ),
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis),
             ),
             // const SizedBox(height: 4),
             // Text(
