@@ -8,7 +8,7 @@ class ProductDetail extends StatelessWidget {
   ProductDetail({required this.product_id});
 
   Future<dynamic> _getProductDetail() async {
-    var url = Uri.parse("https://fakestoreapi.com/products/${this.product_id}");
+    var url = Uri.parse("http://192.168.8.95:8001/api/product_detail?id=${this.product_id}");
     var respone = await http.get(url);
     final data = jsonDecode(respone.body);
     return data;

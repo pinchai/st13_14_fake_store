@@ -42,7 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
   // }
 
   Future<dynamic> _getProduct() async {
-    var url = Uri.parse("https://fakestoreapi.com/products");
+    // var url = Uri.parse("https://fakestoreapi.com/products");
+    var url = Uri.parse("http://192.168.8.95:8001/api/products");
     var respone = await http.get(url);
     final data = jsonDecode(respone.body);
     print(data);
